@@ -1,15 +1,24 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        String S = br.readLine();
-        int i = Integer.parseInt(br.readLine());
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
 
-        System.out.println(S.charAt(i - 1));
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < N; i++) {
+            set.add(scanner.next());
+        }
+
+        int count = 0;
+        for (int i = 0; i < M; i++) {
+            if (set.contains(scanner.next())) {
+                count++;
+            }
+        }
+
+        System.out.println(count);
     }
 }
-
