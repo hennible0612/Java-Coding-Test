@@ -5,32 +5,41 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    public static String solution(String str) {
-        str = str + " ";
-        char[] array = str.toCharArray();
-        StringBuilder answer = new StringBuilder();
-        char curChar = array[0];
-        int counter = 1;
-        for (int i = 1; i < array.length; i++) {
-            if (curChar != array[i]) {
-                answer.append(curChar);
-                if (counter > 1) {
-                    answer.append(counter);
-                }
-                counter = 1;
-            } else {
-                counter++;
-            }
-            curChar = array[i];
-        }
-        return answer.toString();
-    }
-
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
-        System.out.println(solution(str));
+        String[] inputs = br.readLine().split(" ");
+        String s = inputs[0];
+        char t = inputs[1].charAt(0);
+
+        int[] result = new int[s.length()];
+        int dist = 1000;  // 충분히 큰 값으로 초기화
+
+        // 왼쪽에서 오른쪽으로 스캔
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == t) {
+                dist = 0;
+            } else {
+                dist++;
+            }
+            result[i] = dist;
+        }
+
+        dist = 1000;  // 다시 충분히 큰 값으로 초기화
+
+        // 오른쪽에서 왼쪽으로 스캔
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == t) {
+                dist = 0;
+            } else {
+                dist++;
+            }
+            result[i] = Math.min(result[i], dist);
+        }
+
+        // 결과 출력
+        for (int i = 0; i < s.length(); i++) {
+            System.out.print(result[i] + " ");
+        }
     }
 
 }
