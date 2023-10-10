@@ -22,32 +22,31 @@ class Solution {
             for (int j = 0; j < b; j++) {
                 bArray[j] = Integer.parseInt(st.nextToken());
             }
-            System.out.println("------------------");
-            for (int s : aArray) {
-                System.out.print(s + " ");
-            }
-            System.out.println("------------------");
 
-            for (int s : bArray) {
-                System.out.print(s + " ");
+            int sum = Integer.MIN_VALUE;
+
+            // aArray의 길이가 bArray의 길이보다 작거나 같은 경우
+            if (a <= b) {
+                for (int j = 0; j <= b - a; j++) {
+                    int temp = 0;
+                    for (int k = 0; k < a; k++) {
+                        temp += aArray[k] * bArray[j + k];
+                    }
+
+                    sum = Math.max(sum, temp);
+                }
+            } else {
+                for (int j = 0; j <= a - b; j++) {
+                    int temp = 0;
+                    for (int k = 0; k < b; k++) {
+                        temp += bArray[k] * aArray[j + k];
+                    }
+                    sum = Math.max(sum, temp);
+                }
             }
 
-//            int lpoint = 0;
-//            int rpoint = aArray.length;
-//
-//            int answer = Integer.MIN_VALUE;
-//            int sum = 0;
-//
-//            for (int j = 0; j < (bArray.length / aArray.length); j++) {
-//                for (int p = lpoint; p < rpoint; p++) {
-//                    sum += (aArray[p] * bArray[p]);
-//                }
-//                answer = Integer.max(sum, answer);
-//                lpoint = lpoint + 1;
-//                rpoint = rpoint + 1;
-//
-//            }
-//            System.out.println(answer);
+            System.out.println("#" + (i + 1) + " " + sum);
+
         }
     }
 }
