@@ -37,7 +37,7 @@ public class Solution {
     public static boolean isPossible(int curr) {
         for (int i = 0; i < curr; i++) {
             // curr - i 는 현재 행과 이전 행 사이의 거리(높이 차이)
-            //
+            // board[i] == board[curr] 행이 똑같은가
             if (board[i] == board[curr] || curr - i == Math.abs(board[curr] - board[i])) {
                 return false;
             }
