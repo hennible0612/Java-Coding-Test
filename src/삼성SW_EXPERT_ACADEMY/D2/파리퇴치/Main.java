@@ -34,8 +34,8 @@ class Solution {
     private static int getBugPoint(int[][] map, int startX, int startY, int bugSize) {
 
         int tempMax = 0;
-        for(int i = 0; i < bugSize; i++) {
-            for(int j = 0; j < bugSize; j++) {
+        for (int i = 0; i < bugSize; i++) {
+            for (int j = 0; j < bugSize; j++) {
                 tempMax += map[startX + i][startY + j];
             }
         }

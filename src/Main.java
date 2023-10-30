@@ -1,55 +1,32 @@
-class MyMath2 {
-    long a, b;
+import java.util.ArrayList;
+import java.util.List;
 
-    // 인스턴스변수 a, b만을 이용해서 작업하므로 매개변수가 필요없다.
-    long add() {
-        return a + b;
-    }  // a, b는 인스턴스변수
+public class Main {
+    public static void main(String[] args) {
+        String s = "AABBAABAABBAA";  // 예시 문자열
+        int K = 2;                  // 바꿀 수 있는 B의 개수
 
-    long subtract() {
-        return a - b;
-    }
+        List<Integer> bIndices = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'B') {
+                bIndices.add(i);
+            }
+        }
 
-    long multiply() {
-        return a * b;
-    }
+        if (bIndices.size() <= K) {
+            System.out.println(s.length());
+            return;
+        }
 
-    double divide() {
-        return a / b;
-    }
+        int maxLen = 0;
+        bIndices.add(0, -1); // 시작을 위한 -1 추가
+        bIndices.add(s.length()); // 끝을 위한 문자열 길이 추가
 
-    // 인스턴스변수와 관계없이 매개변수만으로 작업이 가능하다.
-    static long add(long a, long b) {
-        return a + b;
-    } // a, b는 지역변수
+        for (int i = 1; i + K < bIndices.size(); i++) {
+            int len = bIndices.get(i + K) - bIndices.get(i - 1) - K;
+            maxLen = Math.max(maxLen, len);
+        }
 
-    static long subtract(long a, long b) {
-        return a - b;
-    }
-
-    static long multiply(long a, long b) {
-        return a * b;
-    }
-
-    static double divide(double a, double b) {
-        return a / b;
-    }
-}
-
-class TestClass2 {
-    void instanceMethod() {
-    } // 인스턴스메서드
-
-    static void staticMethod() {
-    } //static 메서드
-
-    void instanceMethod2() { // 인스턴스메서드
-        instanceMethod(); // 다른 인스턴스메서드를 호출한다.
-        staticMethod(); // static 메서드를 호출한다.
-    }
-
-    static void staticMethod2() { //static 메서드
-//        instanceMethod(); //에러!!! 인스턴스메서드를 호출할수 없다.
-        staticMethod(); // static 메서드는 호출 할 수 있다.
+        System.out.println(maxLen);
     }
 }
