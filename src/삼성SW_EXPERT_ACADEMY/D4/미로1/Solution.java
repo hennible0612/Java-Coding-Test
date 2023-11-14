@@ -63,7 +63,7 @@ public class Solution {
         dfs(x + 1, y);
         dfs(x, y - 1);
         dfs(x, y + 1);
-        map[x][y] = 0;
+//        map[x][y] = 0;
 
     }
 }
