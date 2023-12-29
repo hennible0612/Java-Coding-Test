@@ -1,5 +1,6 @@
 package 삼성SW_EXPERT_ACADEMY.D4.괄호짝짓기;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Stack;
@@ -48,3 +49,12 @@ class Solution {
         }
     }
 }
+=======
+public class Solution {
+    public static void main(String args[]) throws Exception {
+
+
+    }
+
+}
+>>>>>>> 67862240b5640d3df3ded8a969e9aae141cebf5c
