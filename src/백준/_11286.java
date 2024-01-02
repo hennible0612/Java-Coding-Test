@@ -1,9 +1,11 @@
+package 백준;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class Main {
+public class _11286 {
     public static void main(String[] args) throws Exception {
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -16,9 +18,7 @@ public class Main {
                 int abs1 = Math.abs(o1);
                 int abs2 = Math.abs(o2);
 
-                if (abs1 == abs2) {
-                    return o1 - o2;
-                }
+                if (abs1 == abs2) return o1 - o2;
                 return abs1 - abs2;
             }
         });

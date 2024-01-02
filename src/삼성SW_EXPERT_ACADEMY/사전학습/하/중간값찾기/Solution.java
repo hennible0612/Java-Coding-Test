@@ -18,11 +18,9 @@ public class Solution {
         int target = length / 2;
 
 
-        while (st.hasMoreTokens()) {
-            total += Integer.parseInt(st.nextToken());
-        }
 
-        int answer = total / max;
-        System.out.println(answer);
+
+//        int answer = total / max;
+//        System.out.println(answer);
     }
 }
