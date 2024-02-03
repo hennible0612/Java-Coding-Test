@@ -1,4 +1,4 @@
-package 알고리즘_스터디._2주차.class3;
+package 알고리즘_스터디._2주차.class4;
 
 import java.io.BufferedReader;
 import java.io.IOException;
