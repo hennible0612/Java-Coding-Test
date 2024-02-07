@@ -3,37 +3,58 @@ import java.io.InputStreamReader;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class Main {
-    public static void main(String[] args) throws Exception {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
 
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println((int) Math.pow(2, 0));
-//        int n = Integer.parseInt(bf.readLine());
-//
-//        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
-//            @Override
-//            public int compare(Integer o1, Integer o2) {
-//                int abs1 = Math.abs(o1);
-//                int abs2 = Math.abs(o2);
-//
-//                if (abs1 == abs2) {
-//                    return o1 - o2;
-//                }
-//                return abs1 - abs2;
-//            }
-//        });
-//
-//        for (int i = 0; i < n; i++) {
-//            int target = Integer.parseInt(bf.readLine());
-//            if (target != 0) {
-//                pq.add(target);
-//            } else {
-//                if (pq.isEmpty()) {
-//                    System.out.println(0);
-//                } else {
-//                    System.out.println(pq.poll());
-//                }
-//            }
-//        }
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String infix = br.readLine(); // 중위 표기식 입력
+        StringBuilder postfix = new StringBuilder(); // 후위 표기식을 저장할 StringBuilder
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < infix.length(); i++) {
+            char c = infix.charAt(i);
+
+            switch (c) {
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                    while (!stack.isEmpty() && precedence(c) <= precedence(stack.peek())) {
+                        postfix.append(stack.pop());
+                    }
+                    stack.push(c);
+                    break;
+                case '(':
+                    stack.push(c);
+                    break;
+                case ')':
+                    while (!stack.isEmpty() && stack.peek() != '(') {
+                        postfix.append(stack.pop());
+                    }
+                    stack.pop();
+                    break;
+                default:
+                    postfix.append(c);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            postfix.append(stack.pop());
+        }
+
+        System.out.println(postfix.toString());
+    }
+
+    public static int precedence(char op) {
+        if (op == '+' || op == '-') {
+            return 1;
+        } else if (op == '*' || op == '/') {
+            return 2;
+        }
+        return -1;
     }
 }
