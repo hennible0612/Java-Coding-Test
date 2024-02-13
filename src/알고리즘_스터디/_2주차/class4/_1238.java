@@ -92,7 +92,7 @@ public class _1238 {
             for (Node node : graph.get(currentNode)) {
                 // 현재 정점을 거쳐 인접 정점으로 가는 거리가 기존에 알려진 거리보다짧을 경우 업데이트
                 if (dist[node.vertex] > dist[currentNode] + node.cost) {
-                    //업데이트후 인접 정ㅂ점을 큐에 추가 
+                    //업데이트후 인접 정ㅂ점을 큐에 추가
                     dist[node.vertex] = dist[currentNode] + node.cost;
                     pq.add(new Node(node.vertex, dist[node.vertex]));
 
