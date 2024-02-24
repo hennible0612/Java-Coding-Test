@@ -49,11 +49,14 @@ public class _1167 {
             }
         }
 
+        // 가장 먼 정점 찾기
+        // 여기서 가장 먼 정점이란 가중치가 가장 높은것을 말하는 것이다.
         dfs(1, 0);
 
         visited = new boolean[V + 1];
         answer = 0;
 
+        // 제일 먼 노드를 찾았으니 거기 기준에서 dfs 를 통해 가장 먼 노드까지 거리 구한다
         dfs(farthestNode, 0);
 
         System.out.println(answer);;

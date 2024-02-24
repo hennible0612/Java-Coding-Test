@@ -38,6 +38,7 @@ public class _15683_2 {
                 map[i][j] = n;
                 if( n >= 1 && n <= 5 ) {
                     list.add(new Cam(i, j, n));
+                    // -1 하는 이유는 영역계산에서 제외하기 위해
                     map[i][j] = -1; // 원복에 영향을 미치지 않도록
                 }
             }
@@ -127,6 +128,7 @@ public class _15683_2 {
     // 주어진 좌표에서부터 dir 방향으로 비추는 작업 -- 감소
     // 6 만나면 멈춤.
     // Cam 제외
+    // !!!! 간곳은 -- 행 뺸다
     static void watch(int y, int x, int dir) {
         // dir : 0(좌) 1(상) 2(우) 3(하)
         switch(dir) {
@@ -159,6 +161,7 @@ public class _15683_2 {
 
     static void unwatch(int y, int x, int dir) {
         // dir : 0(좌) 1(상) 2(우) 3(하)
+        // -- 한곳을 ++로 원복 시킨다
         switch(dir) {
             case 0 : // 좌
                 for (int i = x - 1; i >= 0; i--) {
