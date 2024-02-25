@@ -48,6 +48,21 @@ public class BJ_게리맨더링_27471 {
         System.out.println(min == Integer.MAX_VALUE ? -1 : min);
     }
 
+    // 모든 가능한 선거구 분할 방법을 생성하는 부분집합 함수
+    static void subset(int srcIdx) {
+        if (srcIdx == N + 1) {
+            check(); // 생성된 부분집합에 대해 검사
+            return;
+        }
+        // 모든 구역이 A 일경우 모든 구역이 B일경우 즉, 모든 경우의 수
+        select[srcIdx] = true;
+        subset(srcIdx + 1);
+        // 백트래킹
+        select[srcIdx] = false;
+        // 다른 선거구역을 선택했으므로 다시 subset호출
+        subset(srcIdx + 1);
+    }
+
     // 선거구 분할의 유효성을 검사하고, 인구 차이를 계산하는 함수
     static void check() {
         Arrays.fill(visit, false); // 방문 배열 초기화
@@ -55,9 +70,15 @@ public class BJ_게리맨더링_27471 {
 
         // 선거구 A의 연결성 확인
         for (int i = 1; i <= N; i++) {
+            //select는 선거구역 A인지 B인지 판별
+            // 만약 A 구역 즉, true 라면 bfs 실행
+            // !!!! True인 모든 애들 다 큐에 넣는다.
             if (select[i]) { // 선거구 A에 포함된 구역을 찾아 BFS 시작
+                //방문확인
                 visit[i] = true;
+                // 확인된 큐 넣기
                 queue.offer(i);
+                //연결성 검사를 위해 하나만 넣고 탈출
                 break;
             }
         }
@@ -83,6 +104,7 @@ public class BJ_게리맨더링_27471 {
 
         // 모든 구역이 연결되었는지 확인
         for (int i = 1; i <= N; i++) {
+            // false가 하나라도 있으면 실패
             if (!visit[i]) return; // 연결되지 않은 구역이 있으면 리턴
         }
 
@@ -94,10 +116,16 @@ public class BJ_게리맨더링_27471 {
     static void bfs(boolean[] select) {
         while (!queue.isEmpty()) {
             int v = queue.poll();
+            // 모든 구역의 수만큼 돈다. 행렬이니까
             for (int i = 1; i <= N; i++) {
+                // 인접 구역 번호 확인
                 int adj = matrix[v][i];
+                // adj가 0이 아닌 경우만 유효 (인접 구역이 존재하는 경우)
+                // visit[adj]가 false인 경우에만 탐색 (방문하지 않은 상태)
+                // select[adj] (현재 검사 중인 구역의 인접 구역판별) == select[v] (현재검사 중인 구역)
+                // 똑같다면 같은 구역
                 if (adj != 0 && !visit[adj] && select[adj] == select[v]) {
-                    visit[adj] = true;
+                    visit[adj] = true; // 인접 구역을 방문했다고 표시
                     queue.offer(adj);
                 }
             }
@@ -113,30 +141,5 @@ public class BJ_게리맨더링_27471 {
         }
         min = Math.min(min, Math.abs(sumA - sumB));
     }
-
-    // 모든 가능한 선거구 분할 방법을 생성하는 부분집합 함수
-    static void subset(int srcIdx) {
-        if (srcIdx == N + 1) {
-            check(); // 생성된 부분집합에 대해 검사
-            return;
-        }
-        select[srcIdx] = true;
-        subset(srcIdx + 1);
-        select[srcIdx] = false;
-        subset(srcIdx + 1);
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
