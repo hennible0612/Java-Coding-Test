@@ -53,7 +53,7 @@ public class _3289 {
 	}
 
 	// 부모를 찾는 함수, 그냥 부모가 아님 "최상위" 부모임
-	// pass compresstion은 아직 아님
+	// path compresstion은 아직 아님
 	// parent[1] -> 999999
 	// parent[2] -> 999999
 	//
