@@ -1,60 +1,46 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.util.StringTokenizer;
 
 public class Main {
+    static int N;
+    static int[][] W;
+    static boolean[] visited;
+    static int minCost = Integer.MAX_VALUE;
+
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String infix = br.readLine(); // 중위 표기식 입력
-        StringBuilder postfix = new StringBuilder(); // 후위 표기식을 저장할 StringBuilder
-        Stack<Character> stack = new Stack<>();
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(bf.readLine());
+        W = new int[N][N];
+        visited = new boolean[N];
 
-        for (int i = 0; i < infix.length(); i++) {
-            char c = infix.charAt(i);
-
-            switch (c) {
-                case '+':
-                case '-':
-                case '*':
-                case '/':
-                    while (!stack.isEmpty() && precedence(c) <= precedence(stack.peek())) {
-                        postfix.append(stack.pop());
-                    }
-                    stack.push(c);
-                    break;
-                case '(':
-                    stack.push(c);
-                    break;
-                case ')':
-                    while (!stack.isEmpty() && stack.peek() != '(') {
-                        postfix.append(stack.pop());
-                    }
-                    stack.pop();
-                    break;
-                default:
-                    postfix.append(c);
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(bf.readLine());
+            for (int j = 0; j < N; j++) {
+                W[i][j] = Integer.parseInt(st.nextToken());
             }
         }
 
-        while (!stack.isEmpty()) {
-            postfix.append(stack.pop());
-        }
-
-        System.out.println(postfix.toString());
+        visited[0] = true;
+        tsp(0, 0, 0);
+        System.out.println(minCost);
     }
 
-    public static int precedence(char op) {
-        if (op == '+' || op == '-') {
-            return 1;
-        } else if (op == '*' || op == '/') {
-            return 2;
+    public static void tsp(int current, int cost, int depth) {
+        if (depth == N - 1) {
+            if (W[current][0] > 0) {
+                minCost = Math.min(minCost, cost + W[current][0]);
+            }
+            return;
         }
-        return -1;
+
+        for (int next = 0; next < N; next++) {
+            if (!visited[next] && W[current][next] > 0) {
+                visited[next] = true;
+                tsp(next, cost + W[current][next], depth + 1);
+                visited[next] = false;
+            }
+        }
     }
 }
