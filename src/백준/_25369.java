@@ -7,15 +7,11 @@ import java.util.StringTokenizer;
 
 public class _25369 {
     static int n;
-    static int a;
-
     static int target;
-
     static int[] selected;
     static int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    static StringBuilder sb = new StringBuilder();
+    static boolean found = false;
 
-    static boolean flag = false;
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(bf.readLine());
@@ -27,19 +23,15 @@ public class _25369 {
         }
 
         selected = new int[n];
+        permutation(0);
 
-        if (target >= 1 && target < 9) {
-            sb.append(target + 1);
-        } else if (target == 9) {
-            sb.append(-1);
-        } else {
-            permutation(0);
+        if (!found) {
+            System.out.println(-1);
         }
-        System.out.println(sb);
     }
 
     private static void permutation(int depth) {
-        if (flag) {
+        if (found) {
             return;
         }
         if (depth == n) {
@@ -48,18 +40,18 @@ public class _25369 {
                 temp *= num;
             }
             if (target < temp) {
-                flag = true;
+                found = true;
                 for (int num : selected) {
-                    sb.append(num).append(" ");
+                    System.out.print(num + " ");
                 }
-                sb.append("\n");
+                System.out.println();
                 return;
             }
-            return;
-        }
-        for (int i = 0; i < 9; i++) {
-            selected[depth] = numbers[i];
-            permutation(depth + 1);
+        } else {
+            for (int i = 0; i < 9; i++) {
+                selected[depth] = numbers[i];
+                permutation(depth + 1);
+            }
         }
     }
 }
