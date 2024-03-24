@@ -1,4 +1,3 @@
-package _20240202.Basic;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
