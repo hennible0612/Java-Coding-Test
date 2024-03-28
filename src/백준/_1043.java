@@ -9,7 +9,6 @@ public class _1043 {
 
     static int[] parent;
     static boolean[] party;
-    static boolean[] knowsTruth;
     static int answer;
 
     public static void main(String[] args) throws Exception {
@@ -23,7 +22,6 @@ public class _1043 {
         M = Integer.parseInt(st.nextToken());
         party = new boolean[M];
         parent = new int[N + 1];
-        knowsTruth = new boolean[N + 1];
 
         // 부모 초기화
         for (int i = 1; i <= N; i++) {
@@ -55,6 +53,7 @@ public class _1043 {
         for (int[] party : parties) {
             boolean canLie = true; // 이 파티에서 거짓말을 할 수 있는지
             for (int person : party) {
+
                 if (find(person) == find(0)) { // 진실을 아는 사람과 연결되어 있다면
                     canLie = false;
                     break;
