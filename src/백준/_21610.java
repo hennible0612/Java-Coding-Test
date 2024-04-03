@@ -62,7 +62,9 @@ public class _21610 {
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(bf.readLine());
+            // 방향
             int d = Integer.parseInt(st.nextToken());
+            // 거리
             int s = Integer.parseInt(st.nextToken());
 
             move(d, s);
